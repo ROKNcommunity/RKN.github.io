@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROKN Mini App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: black;
+            overflow: hidden;
+        }
+
+        .stars {
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation: blink 2s infinite alternate;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        @keyframes blink {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 100%;
+            padding: 10px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .header span {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .clickable-image {
+            margin-top: 100px;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .score {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .bottom-section {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .bottom-section div {
+            text-align: center;
+            color: white;
+        }
+
+        .bottom-section img {
+            width: 50px;
+            height: auto;
+        }
+
+        .floating-score {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            opacity: 1;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="stars">
+        <div class="header">
+            <img src="IMG_1685.png" alt="Logo">
+            <span>ROKN</span>
+        </div>
+
+        <div class="score">Score: <span id="score-value">0</span></div>
+
+        <img src="IMG_1685.png" class="clickable-image" id="clickable-image" alt="Click me">
+
+        <div class="bottom-section">
+            <div>
+                <img src="friends.png" alt="Friends">
+                <p>Friends</p>
+            </div>
+            <div>
+                <img src="eren.png" alt="Eren">
+                <p>Eren</p>
+            </div>
+            <div>
+                <img src="levelup.png" alt="Level Up">
+                <p>Level Up</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating score for animation -->
+    <div id="floating-score" class="floating-score" style="display: none;">+1</div>
+
+    <script>
+        let score = 0;
+
+        const clickableImage = document.getElementById('clickable-image');
+        const scoreValue = document.getElementById('score-value');
+        const floatingScore = document.getElementById('floating-score');
+
+        // Function to update score
+        function updateScore() {
+            score++;
+            scoreValue.textContent = score;
+
+            // Show floating +1 score animation
+            floatingScore.style.display = 'block';
+            floatingScore.style.transform = 'translateY(-50px)';
+            floatingScore.style.opacity = 0;
+
+            // Reset the floating score position after the animation
+            setTimeout(() => {
+                floatingScore.style.display = 'none';
+                floatingScore.style.transform = 'translateY(0)';
+                floatingScore.style.opacity = 1;
+            }, 500);
+        }
+
+        clickableImage.addEventListener('click', updateScore);
+    </script>
+</body>
+</html>
